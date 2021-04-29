@@ -43,3 +43,5 @@ User.init({
     freezeTableName: true,
     modelName: 'user'
 })
+
+module.exports = User
