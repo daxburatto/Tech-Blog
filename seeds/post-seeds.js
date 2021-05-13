@@ -2,23 +2,23 @@ const { Post } = require('../models')
 
 const postdata = [
     {
-        title: "How to come up with unique names",
-        content: "You know what I have no idea...",
+        title: "Title 1",
+        content: "Content goes here",
         user_id: 1
     },
     {
-        title: "Why your tech blog doesnt need to be interesting",
-        content: "Because it's not even real!",
+        title: "Title 2",
+        content: "Content goes here Content goes here",
         user_id: 2
     },
     {
-        title: "I can't come up with anything else",
-        content: "Someone please help me come up with content",
+        title: "Title 3",
+        content: "Content goes here Content goes here",
         user_id: 3
     },
     {
-        title: "Randomness is super fun",
-        content: "Austin Texas is a cool place to live",
+        title: "Title 4",
+        content: "Content goes here Content goes here",
         user_id: 3
     },
 ]
