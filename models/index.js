@@ -12,23 +12,19 @@ Post.belongsTo(User, {
 })
 
 Comment.belongsTo(User, {
-    foreignkey: 'user_id',
-    onDelete: 'SET NULL'
+    foreignkey: 'user_id'
 })
 
 Comment.belongsTo(Post, {
     foreignkey: 'post_id',
-    onDelete: 'SET NULL'
 })
 
 User.hasMany(Comment, {
-    foreignkey: 'user_id',
-    onDelete: 'SET NULL'
+    foreignkey: 'user_id'
 })
 
 User.hasMany(Comment, {
-    foreignkey: 'post_id',
-    onDelete: "SET NULL"
+    foreignkey: 'post_id'
 })
 
 module.exports = {

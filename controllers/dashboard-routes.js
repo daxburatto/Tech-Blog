@@ -11,8 +11,8 @@ router.get('/', withAuth, (req, res) => {
             user_id: req.session.user_id
         }, attributes: [
         'id',
-        'post_url',
         'title',
+        'content',
         'created_at',
         [sequelize.literal('(SELECT COUNT(*) FROM vore WHERE post.id = vote.post_id)'), 'vote_count']
     ], include: [
