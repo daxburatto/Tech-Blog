@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const sequelize = require('../../config/connection')
-const { Post, User, Comment, Vote } = require('../../models')
+const { Post, User, Comment } = require('../../models')
 const withAuth = require('../../utils/auth')
 const { route } = require('./comment-routes')
 
@@ -9,10 +9,9 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
-            'post_url',
             'title',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+            'post_content'
         ],
         order: [
             ['created_at', 'DESC']
@@ -42,22 +41,21 @@ router.get('/:id', (req, res) => {
         }, 
         attributes: [
             'id',
-            'post_url',
             'title',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+            'post_content'
         ], 
         include: [{
+            model: User,
+            attributes: ['username']
+        }, 
+        {
             model: Comment,
             attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
             include: {
                 model: User,
                 attributes: ['username']
             }
-        }, 
-        {
-            model: User,
-            attributes: ['username']
         }]
     }).then(dbPostData => {
         if (!dbPostData) {
@@ -83,20 +81,10 @@ router.post('/', withAuth, (req, res) => {
     })
 })
 
-router.put('/upvote', (req, res) => {
-    if (req.session) {
-        Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User})
-        .then(updatedVoteData => res.json(updatedVoteData))
-        .catch(err => {
-            console.log(err)
-            res.status(500).json(err)
-        })
-    }
-})
-
 router.put('/:id', (req, res) => {
     Post.update({
-        title: req.body.title
+        title: req.body.title,
+        post_content: req.body.post_content
       }, {
         where: {
           id: req.params.id

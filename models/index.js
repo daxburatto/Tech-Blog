@@ -7,8 +7,7 @@ User.hasMany(Post, {
 })
 
 Post.belongsTo(User, {
-    foreignkey: 'user_id',
-    onDelete: 'SET NULL'
+    foreignkey: 'user_id'
 })
 
 Comment.belongsTo(User, {
@@ -23,7 +22,7 @@ User.hasMany(Comment, {
     foreignkey: 'user_id'
 })
 
-User.hasMany(Comment, {
+Post.hasMany(Comment, {
     foreignkey: 'post_id'
 })
 
