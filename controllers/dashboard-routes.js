@@ -40,7 +40,8 @@ router.get('/edit/:id', withAuth, (req, res) => {
             where: {
                 id: req.params.id
             },
-            attributes: ['id',
+            attributes: [
+                'id',
                 'title',
                 'content',
                 'created_at'
@@ -91,7 +92,7 @@ router.get('/create/', withAuth, (req, res) => {
                 'id',
                 'title',
                 'created_at',
-                'post_content'
+                'content'
             ],
             include: [{
                     model: Comment,

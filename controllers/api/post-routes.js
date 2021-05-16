@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
             'id',
             'title',
             'created_at',
-            'post_content'
+            'content'
         ],
         order: [
             ['created_at', 'DESC']
@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
             'id',
             'title',
             'created_at',
-            'post_content'
+            'content'
         ], 
         include: [{
             model: User,
