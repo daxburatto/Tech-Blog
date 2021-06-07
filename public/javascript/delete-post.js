@@ -1,6 +1,4 @@
-const e = require("express")
-
-async function deleteFormatHandler(event) {
+async function deleteFormHandler(event) {
     event.preventDefault()
 
     const id = window.location.toString().split('/')[
@@ -21,3 +19,5 @@ async function deleteFormatHandler(event) {
         alert(response.statusText)
     }
 }
+
+document.querySelector('.delete-post-btn').addEventListener('click', deleteFormHandler);
